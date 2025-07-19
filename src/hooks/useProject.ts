@@ -10,5 +10,14 @@ export const useProject = () => {
       setProject(JSON.parse(saveDate));
     }
   }, []);
-  return { project };
+  const saveProject = (newProject: Project) => {
+    try {
+      const projectJson = JSON.stringify(newProject);
+      localStorage.setItem("warikan-go-project", projectJson);
+      setProject(newProject);
+    } catch (error) {
+      console.error("LocalStorageへのプロジェクト保存に失敗しました", error);
+    }
+  };
+  return { project, saveProject };
 };
